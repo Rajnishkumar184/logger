@@ -1,0 +1,15 @@
+{
+  "name": "logger",
+  "version": "1.0.0",
+  "description": "logger.js =================== Before using this you need to require this file that return logger object, through which we can access  functionality.",
+  "main": "logger.js",
+  "dependencies": {
+    "bluebird": "^2.10.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rajnish Kumar <kumarrajnish184@gmail.com> (http://js2tutorials.com)",
+  "license": "ISC"
+}
