@@ -1,6 +1,6 @@
 {
   "name": "nodedebug",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Before using this you need to require this file that return logger object, through which we can access  functionality.",
   "main": "index.js",
   "dependencies": {
