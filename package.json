@@ -1,6 +1,6 @@
 {
   "name": "nodedebug",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Before using this you need to require this file that return logger object, through which we can access functionality.",
   "main": "index.js",
   "dependencies": {
@@ -19,6 +19,13 @@
      "url":"https://github.com/Rajnishkumar184/nodedebug/issues"
     },
    "homepage":"https://github.com/Rajnishkumar184/nodedebug#readme", 
+   "keywords":[
+   "nodedebug",
+   "debug",
+   "log",
+   "logger",
+   "npmdebug"
+   ],
   "author": "Rajnish Kumar <kumarrajnish184@gmail.com> (http://js2tutorials.com)",
   "license": "ISC"
 }
