@@ -4,68 +4,35 @@ Before using this you need to require this file that return logger object, throu
 
 ----------
 ```javascript
-var log=require('logger');
-log.createLog("user","info","hello message");
+var logger=require('logger');
+logger.log(message,type,directory,file);
+logger.console(message,type);
 ````
-createLog(module_name, message_type, message_text);
+
+```javascript
+logger.log(message,type,directory,file);
+```
 
 this function requires three parameters :
-1) module_name : is name of module inside which log message entry will take place.
-2) message_type : is type of message like - error, info, warn.
-3) message_text : is message that we want to write inside log file.
+1) message : is message that we want to write inside log file.
+2) type : is type of message like - error, info, warn,debug.
+3) directory : is name of directory inside which log file will create.
+4) file: id the name of file inside which log message entry will take place.
 
-Code for logger.js
-=======
+type,directory,file are optional parameters.
 
-  
+default value for type is 'info'
+default value for directory is 'log'
+default value for file is current date
+
 ```javascript
-var fs=require('fs');
-var Promise=require('bluebird');
-var path=require('path');
-var appDir = path.dirname(require.main.filename);
-
-Date.prototype.yyyymmdd = function() {
-    var mm = this.getMonth() + 1;
-    var dd = this.getDate();
-    return [this.getFullYear(), mm, dd].join('-');
-};
-
-
-var logger={
-    createLog:function (module,type,message) {
-       var date = new Date();
-        var filepath='/'+module + '/'+date.yyyymmdd()+'.txt';
-        this.dirExist(module).then(function (data) {
-            fs.exists(filepath, function(exists){
-                message='Time : '+Date.now()+' | '+type+' => '+message;
-                fs.appendFile(appDir +filepath,message+'\n', { flags: 'a+' },function(err) {
-                    if(err) {
-                        //console.log(err);
-                    }
-                });
-            });
-      },function (err) {
-            console.log(err);
-        });
-    },
-    dirExist:function(directory) {
-        return new Promise(function(resolve, reject) {
-            fs.stat(appDir + '/' + directory, function (err, stats) {
-                if (err) {
-                    fs.mkdir(appDir + '/' + directory, function (error) {
-                        if (error) {
-                            reject(false);
-                        }
-                        else{
-                            resolve(true);
-                        }
-                    });
-                } else {
-                    resolve(true);
-                }
-            });
-        });
-    }
-};
-module.exports=logger;
+logger.console(message,type);
 ```
+
+this function requires two parameters :
+1) message : is message that we want to write inside log file.
+2) type : is type of message like - error, info, warn,debug.
+
+type is optional, if we don't pass value for type then it's default value is 'info' .
+
+
