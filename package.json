@@ -1,7 +1,7 @@
 {
   "name": "nodedebug",
-  "version": "1.0.2",
-  "description": "Before using this you need to require this file that return logger object, through which we can access  functionality.",
+  "version": "1.0.3",
+  "description": "Before using this you need to require this file that return logger object, through which we can access functionality.",
   "main": "index.js",
   "dependencies": {
     "bluebird": "^2.10.2",
@@ -11,6 +11,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository" :{ 
+    "type" : "git",
+   "url" : "https://github.com/Rajnishkumar184/nodedebug.git"
+  },
+  "bugs":{
+     "url":"https://github.com/Rajnishkumar184/nodedebug/issues"
+    },
+   "homepage":"https://github.com/Rajnishkumar184/nodedebug#readme", 
   "author": "Rajnish Kumar <kumarrajnish184@gmail.com> (http://js2tutorials.com)",
   "license": "ISC"
 }
