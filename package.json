@@ -4,7 +4,8 @@
   "description": "logger.js =================== Before using this you need to require this file that return logger object, through which we can access  functionality.",
   "main": "logger.js",
   "dependencies": {
-    "bluebird": "^2.10.2"
+    "bluebird": "^2.10.2",
+    "colors": "^1.1.2"
   },
   "devDependencies": {},
   "scripts": {
