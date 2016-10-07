@@ -4,7 +4,7 @@ Before using this you need to require this file that return logger object, throu
 
 ----------
 ```javascript
-create a file like server.js and pest this code inside file and run the command "node server.js" on terminal.
+create a file like server.js and write this code inside file and run the command "node server.js" on terminal.
 
 var debug=require('nodedebug');
 debug.log(message,type,directory,file);
