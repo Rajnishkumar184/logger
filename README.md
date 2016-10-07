@@ -1,4 +1,4 @@
-logger
+nodedebug
 ===================
 Before using this you need to require this file that return logger object, through which we can access  functionality.
 
@@ -6,14 +6,14 @@ Before using this you need to require this file that return logger object, throu
 ```javascript
 create a file like server.js and pest this code inside file and run the command "node server.js" on terminal.
 
-var logger=require('logger');
-logger.log(message,type,directory,file);
-logger.console(message,type);
+var debug=require('nodedebug');
+debug.log(message,type,directory,file);
+debug.console(message,type);
 
 For Example:
 
-logger.log("hello","error",null,null); // this will create a file with current date inside log folder.
-logger.console("hello","error"); // this will simply print message with colorful text.
+debug.log("hello","error",null,null); // this will create a file with current date inside log folder.
+debug.console("hello","error"); // this will simply print message with colorful text.
 
 output :
 
@@ -22,7 +22,7 @@ Time : 1475841050465 | error => hello, server.js  7:8
 ````
 
 ```javascript
-logger.log(message,type,directory,file);
+debug.log(message,type,directory,file);
 ```
 
 this function requires three parameters :
@@ -38,7 +38,7 @@ default value for directory is 'log'
 default value for file is current date
 
 ```javascript
-logger.console(message,type);
+debug.console(message,type);
 ```
 
 this function requires two parameters :
