@@ -4,9 +4,21 @@ Before using this you need to require this file that return logger object, throu
 
 ----------
 ```javascript
+create a file like server.js and pest this code inside file and run the command "node server.js" on terminal.
+
 var logger=require('logger');
 logger.log(message,type,directory,file);
 logger.console(message,type);
+
+For Example:
+
+logger.log("hello","error",null,null); // this will create a file with current date inside log folder.
+logger.console("hello","error"); // this will simply print message with colorful text.
+
+output :
+
+Time : 1475841050465 | error => hello, server.js  7:8
+
 ````
 
 ```javascript
