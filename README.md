@@ -1,4 +1,4 @@
-logger.js
+logger
 ===================
 Before using this you need to require this file that return logger object, through which we can access  functionality.
 
