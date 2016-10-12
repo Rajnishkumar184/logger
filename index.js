@@ -20,35 +20,72 @@ colors.setTheme({
     debug: 'blue',
     error: 'red'
 });
+Object.defineProperty(global, '__stack', {
+    get: function() {
+        var orig = Error.prepareStackTrace;
+        Error.prepareStackTrace = function(_, stack)
+        {
+            return stack;
+        };
+        var err = new Error;
+        Error.captureStackTrace(err, arguments.callee);
+        var stack = err.stack;
+        Error.prepareStackTrace = orig;
+        return stack;
+    }
+});
+Object.defineProperty(global, '__line', {
+    get: function() {
+        return __stack[2].getLineNumber();
+    }
+});
+Object.defineProperty(global, '__function', {
+    get: function() {
+        return __stack[2].getFunctionName();
+    }
+});
+Object.defineProperty(global, '__file', {
+    get: function(){
+        return __stack[2].getFileName().split('/').slice(-1)[0];
+    } });
+
 var logger={
-    log:function (message,type,directory,file) {
-
+    log:function (message,obj) {
+        var functionName='',fileName='',lineNum='';
+        if(__function){
+            functionName=__function;
+        }
+        if(__file){
+            fileName=__file;
+        }
+        if(__line){
+            lineNum=__line;
+        }
         var date = new Date();
-
-        if(!type){
+        var type='',directory='',file='';
+        if(obj && obj.type){
+            type=obj.type;
+        }
+        else{
             type='info';
         }
-        if(!directory){
+        if(obj && obj.directory){
+            directory=obj.directory;
+        }
+        else{
             directory='log';
         }
-        if(!file){
+        if(obj && obj.file){
+            file=obj.file;
+        }
+        else{
             file=date.yyyymmdd();
         }
         var filepath='/'+directory + '/'+file+'.log';
 
-        var logLineDetails = ((new Error().stack).split("at ")[2].trim());
-        logLineDetails=logLineDetails.split(' ');
-        var function_name='';
-        if(logLineDetails[0]!='Object.<anonymous>'){
-            function_name=logLineDetails[0];
-        }
-        var file_data=logLineDetails[1].substring(logLineDetails[1].lastIndexOf('/')+1,logLineDetails[1].length-1).split(':');
-        var file_name=file_data[0];
-        var line_number=file_data[1]+':'+file_data[2];
-
         this.dirExist(directory).then(function (data) {
             fs.exists(filepath, function(exists){
-                message='Time : '+Date.now()+' | '+type+' => '+message+", "+file_name+" "+function_name+" "+line_number;
+                message='Time : '+Date.now()+' | '+type+' => '+message+", "+fileName+" "+functionName+" "+lineNum;
                 fs.appendFile(appDir +filepath,message+'\n', { flags: 'a+' },function(err) {
                     if(err) {
                         //console.log(err);
@@ -80,19 +117,20 @@ var logger={
         });
     },
     console:function(message,type){
+        var functionName='',fileName='',lineNum='';
+        if(__function){
+            functionName=__function;
+        }
+        if(__file){
+            fileName=__file;
+        }
+        if(__line){
+            lineNum=__line;
+        }
         if(!type){
             type='info';
         }
-        var logLineDetails = ((new Error().stack).split("at ")[2].trim());
-        logLineDetails=logLineDetails.split(' ');
-        var function_name='';
-        if(logLineDetails[0]!='Object.<anonymous>'){
-            function_name=logLineDetails[0];
-        }
-        var file_data=logLineDetails[1].substring(logLineDetails[1].lastIndexOf('/')+1,logLineDetails[1].length-1).split(':');
-        var file_name=file_data[0];
-        var line_number=file_data[1]+':'+file_data[2];
-        message='Time : '+Date.now()+' | '+type+' => '+message+", "+file_name+" "+function_name+" "+line_number;
+        message='Time : '+Date.now()+' | '+type+' => '+message+", "+fileName+" "+functionName+" "+lineNum;
         switch(type){
             case 'debug':
                 console.log(message.debug);
