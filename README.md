@@ -45,7 +45,7 @@ Time : 1475841050465 | error => hello, server.js message 4
 ````
 
 ```javascript
-debug.log(message,type,directory,file);
+debug.log(message,{type:"message_type",directory:"directory_name",file:"file_name"});
 ```
 
 this function requires two parameters :
